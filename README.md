@@ -1,6 +1,6 @@
-# kspm-scanner
+# kspm-scan
 
-A lightweight **Kubernetes Security Posture Management (KSPM)** scanner. It
+A lightweight **Kubernetes Security Posture Management (KSPM)** scan. It
 inspects pod/container specs — from local YAML manifests *or* a live
 cluster — for common workload security misconfigurations, scores the
 result, and can gate CI pipelines on what it finds.
@@ -8,7 +8,7 @@ result, and can gate CI pipelines on what it finds.
 ```
 $ kspm manifests examples/insecure-pod.yaml
 
-KSPM Scanner — scanned 1 workload(s)
+KSPM Scan — scanned 1 workload(s)
 ┏━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ Severity ┃ Rule    ┃ Workload                          ┃ Container ┃ Finding                                       ┃
 ┡━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -51,7 +51,7 @@ you can read end-to-end in an afternoon, run in CI, and extend.
 ```bash
 pip install -e .
 # or, without cloning:
-pip install git+https://github.com/<you>/kspm-scanner.git
+pip install git+https://github.com/<you>/kspm-.git
 ```
 
 Requires Python 3.9+. Live cluster scans need read access to `pods` (the
@@ -114,9 +114,9 @@ fail_on: HIGH
 ### Docker
 
 ```bash
-docker build -t kspm-scanner .
-docker run --rm -v "$(pwd)":/manifests kspm-scanner manifests /manifests
-docker run --rm -v ~/.kube/config:/root/.kube/config:ro kspm-scanner live
+docker build -t kspm-scan .
+docker run --rm -v "$(pwd)":/manifests kspm-scan manifests /manifests
+docker run --rm -v ~/.kube/config:/root/.kube/config:ro kspm-scan live
 ```
 
 ## Rules (v1: workload security posture)
@@ -148,7 +148,7 @@ kspm/
 ├── rules/
 │   ├── base.py         # Rule ABC + self-registering ALL_RULES list
 │   └── workload.py     # the 11 rules described above
-├── scanner.py         # runs rules over units, computes score/summary
+├── scan.py         # runs rules over units, computes score/summary
 ├── reporters/          # console (rich), json, html
 └── cli.py              # argparse entrypoint tying it all together
 ```
@@ -161,7 +161,7 @@ once and run identically against a YAML file or a running Pod.
 additive: create `kspm/rules/rbac.py` with `Rule` subclasses (they
 self-register via `ALL_RULES`), import that module from
 `kspm/rules/__init__.py`, and optionally add a loader for the new resource
-type if it isn't pod-spec-shaped. No changes needed to the CLI, scanner, or
+type if it isn't pod-spec-shaped. No changes needed to the CLI, scan, or
 reporters.
 
 ## Roadmap
@@ -185,7 +185,7 @@ ruff check kspm tests
 
 `tests/fixtures/insecure_pod.yaml` and `tests/fixtures/hardened_deployment.yaml`
 (mirrored under `examples/`) are used both as test fixtures and as a quick
-way to see the scanner in action.
+way to see the scan in action.
 
 ## License
 
