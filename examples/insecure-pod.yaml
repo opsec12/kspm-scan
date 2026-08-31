@@ -1,0 +1,28 @@
+# Deliberately insecure Pod used by tests and as a scan demo.
+# Nearly every workload rule should fire against this manifest.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: legacy-app
+  namespace: payments
+spec:
+  hostNetwork: true
+  hostPID: true
+  containers:
+    - name: app
+      image: myregistry/legacy-app:latest
+      securityContext:
+        privileged: true
+        allowPrivilegeEscalation: true
+        capabilities:
+          add: ["SYS_ADMIN", "NET_ADMIN"]
+      ports:
+        - containerPort: 8080
+          hostPort: 8080
+      volumeMounts:
+        - name: host-root
+          mountPath: /host
+  volumes:
+    - name: host-root
+      hostPath:
+        path: /
