@@ -1,5 +1,5 @@
-# A Deployment following the Pod Security Standards "restricted" profile.
-# None of the workload rules should fire against this manifest.
+# A Deployment following the Pod Security Standards "restricted" profile
+# None of the workload rules should fire against this manifest
 apiVersion: apps/v1
 kind: Deployment
 metadata:
