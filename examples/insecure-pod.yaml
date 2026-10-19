@@ -1,5 +1,5 @@
-# Deliberately insecure Pod used by tests and as a scan demo.
-# Nearly every workload rule should fire against this manifest.
+# Deliberately insecure Pod used by tests and as a scan demo
+# Nearly every workload rule should fire against this manifest
 apiVersion: v1
 kind: Pod
 metadata:
